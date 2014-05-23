@@ -1,20 +1,10 @@
-Bundler.require "activiti-engine"
-Bundler.require "h2"
-
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
   def index
-    begin
-    config_path = "/#{Rails.root}/config/activiti.cfg.xml"
-    puts "config_path = #{config_path}"
-    $process_engine_configuration = Java::OrgActivitiEngine::ProcessEngineConfiguration.createProcessEngineConfigurationFromResource(config_path)
-    rescue Exception => e
-      puts "Exception: #{e}"
-      puts "Backtrace: " + e.backtrace.join("\n")
-    end
+    #render text: "Activiti process_engine: #{Activiti.process_engine}"
     @posts = Post.all
   end
 
@@ -25,6 +15,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
+    render text: "Number of process definitions: #{Activiti.process_engine.getRepositoryService.createProcessDefinitionQuery().count()}"
     @post = Post.new
   end
 
