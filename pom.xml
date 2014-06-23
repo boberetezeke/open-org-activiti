@@ -15,7 +15,6 @@
       <groupId>org.activiti</groupId>
       <artifactId>activiti-engine</artifactId>
       <version>5.15.1</version>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>
